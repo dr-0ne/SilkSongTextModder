@@ -6,6 +6,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using TeamCherry.Localization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SilkSongTextSheetOverride;
 
@@ -15,13 +16,28 @@ public class TextSheetOverridePlugin : BaseUnityPlugin
     internal static ManualLogSource TextSheetOverrideLogger = new ManualLogSource("TextSheetOverride");
     private static readonly string ModDir = Path.Combine(Application.dataPath, "Mods", "TextSheetOverride");
 
+    private static bool _patched = false;
+    
     private void Awake()
     {
         if (!Directory.Exists(ModDir)) Directory.CreateDirectory(ModDir);
         
         BepInEx.Logging.Logger.Sources.Add(TextSheetOverrideLogger);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private static void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode)
+    {
+        if (_patched) return;
+        DoPatch();
+    }
+
+    private static void DoPatch()
+    {
         var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
         harmony.PatchAll();
+        _patched = true;
+        TextSheetOverrideLogger.LogInfo("Harmony patching complete");
     }
     
     [HarmonyPatch]
@@ -36,13 +52,13 @@ public class TextSheetOverridePlugin : BaseUnityPlugin
         static void Postfix(ref string __result, object[] __args)
         {
             string sheetTitle = __args[0] as string;
-            TextSheetOverrideLogger.LogInfo($"Load sheet with ID {sheetTitle}");
+            TextSheetOverrideLogger.LogInfo($"Loading sheet '{sheetTitle}'");
             if (!Directory.Exists(ModDir)) return;
 
-            var matchingModdedPlainTextFiles = Directory.GetFiles(ModDir).Where(x => x.Equals(sheetTitle + ".txt")).ToList();
+            var matchingModdedPlainTextFiles = Directory.GetFiles(ModDir).Where(x => Path.GetFileName(x).Equals(sheetTitle + ".txt")).ToList();
             if (!matchingModdedPlainTextFiles.Any()) return;
 
-            TextSheetOverrideLogger.LogInfo($"Found external sheet to override {sheetTitle}");
+            TextSheetOverrideLogger.LogInfo($"Found external sheet to override '{sheetTitle}'");
             var replacementTextContent = File.ReadAllText(matchingModdedPlainTextFiles.First());
 
             __result = replacementTextContent;
