@@ -110,77 +110,52 @@ public class TextModderPlugin : BaseUnityPlugin
 
         static Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>> ReadInCustomText()
         {
-            /*var newDict = new Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>>();
-            newDict.Add(LanguageCode.EN, new Dictionary<string, Dictionary<string, string>>());
-            newDict[LanguageCode.EN].Add("MainMenu", new Dictionary<string, string>());
-            newDict[LanguageCode.EN]["MainMenu"]["BUTTON_CAST"] = "LOCK IN";
-            return newDict;*/
-            
             var returnDict = new Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>>();
             foreach (var filePath in Directory.GetFiles(ModDir))
             {
                 TextModderLogger.LogInfo($"Reading Text From File: {filePath}");
-                DeserializeCustomText(filePath,returnDict);
-                TextModderLogger.LogInfo($"Finshed reading Text From File: {filePath}");
+                foreach (var line in File.ReadAllLines(filePath))
+                {
+                    DeserializeCustomTextLine(line,returnDict);
+                }
             }
             
             return returnDict;
         }
 
-        static void DeserializeCustomText(string filePathToDeserialize, Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>> dictToAddTo)
+        static void DeserializeCustomTextLine(string lineToDeserialize, Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>> dictToAddTo)
         {
-            TextModderLogger.LogInfo($"something??");
-            //XDocument doc = XDocument.Load(File.ReadAllText(filePathToDeserialize));
+            TextModderLogger.LogInfo(lineToDeserialize);
 
-            XmlReader xmlReader = XmlReader.Create(new StringReader( filePathToDeserialize));
-            
-            while (xmlReader.ReadToFollowing("entry"))
+            if (string.IsNullOrWhiteSpace(lineToDeserialize)) return;
+
+            // Split into four parts
+            var parts = lineToDeserialize.Split(new[] { '>' }, 4); // limit to 4 parts in case the value contains colons
+            if (parts.Length != 4)
             {
-                xmlReader.MoveToFirstAttribute();
-                string value = xmlReader.Value;
-                xmlReader.MoveToElement();
-                string text2 = xmlReader.ReadElementContentAsString().Trim();
-                text2 = text2.UnescapeXml();
-                TextModderLogger.LogInfo($"{text2}");
+                TextModderLogger.LogInfo($"Invalid format: {lineToDeserialize}");
+                return;
             }
-            
-            //if (doc.Root == null) return;
-            
-            /*foreach (var languageElem in doc.Root.Elements("language"))
+
+            // Parse language code
+            if (!Enum.TryParse(parts[0], out LanguageCode langCode))
             {
-                string? langName = languageElem.Attribute("name")?.Value;
-                TextModderLogger.LogInfo($"{langName}");
-                if (langName == null || !Enum.TryParse<LanguageCode>(langName, true, out var langCode))
-                {
-                    continue;
-                }
-                TextModderLogger.LogInfo($"{langCode}");
+                TextModderLogger.LogInfo($"Unknown language code: {parts[0]}");
+                return;
+            }
 
-                if (!dictToAddTo.ContainsKey(langCode))
-                {
-                    dictToAddTo.Add(langCode, new Dictionary<string, Dictionary<string, string>>());
-                }
-                
-                foreach (var sheetElem in languageElem.Elements("sheet"))
-                {
-                    string? sheetName = sheetElem.Attribute("name")?.Value;
-                    if (sheetName == null) continue;
+            string topKey = parts[1];
+            string subKey = parts[2];
+            string value = parts[3];
 
-                    if (!dictToAddTo[langCode].ContainsKey(sheetName))
-                    {
-                        dictToAddTo[langCode].Add(sheetName, new Dictionary<string, string>());
-                    }
-                    
-                    foreach (var entryElem in sheetElem.Elements("entry"))
-                    {
-                        string? entryName = entryElem.Attribute("name")?.Value;
-                        if (entryName == null) continue;
-                        
-                        TextModderLogger.LogInfo($"Found Custom Text: ({langCode}:{sheetName}:{entryName}:{entryElem.Value})");
-                        dictToAddTo[langCode][sheetName][entryName] = entryElem.Value;
-                    }
-                }
-            }*/
+            if (!dictToAddTo.ContainsKey(langCode))
+                dictToAddTo[langCode] = new Dictionary<string, Dictionary<string, string>>();
+
+            if (!dictToAddTo[langCode].ContainsKey(topKey))
+                dictToAddTo[langCode][topKey] = new Dictionary<string, string>();
+
+            // Add or update the value
+            dictToAddTo[langCode][topKey][subKey] = value;
         }
     }
 }
