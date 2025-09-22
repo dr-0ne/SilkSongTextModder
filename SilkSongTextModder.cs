@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
@@ -47,7 +49,7 @@ public class TextModderPlugin : BaseUnityPlugin
         
         static MethodBase TargetMethod()
         {
-            return AccessTools.Method(typeof(Language), "DoSwitch", [typeof(string)]);
+            return AccessTools.Method(typeof(Language), "DoSwitch", [typeof(LanguageCode)]);
         }
         
         static void Postfix()
@@ -88,7 +90,7 @@ public class TextModderPlugin : BaseUnityPlugin
                 return;
             }
             
-            // modify the text
+            // Copy each custom value into the game's text data
             foreach (var sheet in customSheetsByLanguage[currentLanguage])
             {
                 if (!currentEntrySheets.ContainsKey(sheet.Key))
@@ -108,11 +110,60 @@ public class TextModderPlugin : BaseUnityPlugin
 
         static Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>> ReadInCustomText()
         {
-            var newDict = new Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>>();
+            /*var newDict = new Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>>();
             newDict.Add(LanguageCode.EN, new Dictionary<string, Dictionary<string, string>>());
             newDict[LanguageCode.EN].Add("MainMenu", new Dictionary<string, string>());
             newDict[LanguageCode.EN]["MainMenu"]["BUTTON_CAST"] = "LOCK IN";
-            return newDict;
+            return newDict;*/
+            
+            var returnDict = new Dictionary<LanguageCode, Dictionary<string?, Dictionary<string?, string>>>();
+            foreach (var filePath in Directory.GetFiles(ModDir))
+            {
+                DeserializeCustomText(filePath,returnDict);
+            }
+            
+            return returnDict;
+        }
+
+        static void DeserializeCustomText(string filePathToDeserialize, Dictionary<LanguageCode, Dictionary<string?, Dictionary<string?, string>>> dictToAddTo)
+        {
+            XDocument doc = XDocument.Load(filePathToDeserialize);
+
+            if (doc.Root == null) return;
+            
+            foreach (var languageElem in doc.Root.Elements("language"))
+            {
+                string? langName = languageElem.Attribute("name")?.Value;
+                if (langName == null || !Enum.TryParse<LanguageCode>(langName, true, out var langCode))
+                {
+                    continue;
+                }
+
+                if (!dictToAddTo.ContainsKey(langCode))
+                {
+                    dictToAddTo.Add(langCode, new Dictionary<string?, Dictionary<string?, string>>());
+                }
+                
+                foreach (var sheetElem in languageElem.Elements("sheet"))
+                {
+                    string? sheetName = sheetElem.Attribute("name")?.Value;
+                    if (sheetName == null) continue;
+
+                    if (!dictToAddTo[langCode].ContainsKey(sheetName))
+                    {
+                        dictToAddTo[langCode].Add(sheetName, new Dictionary<string?, string>());
+                    }
+                    
+                    foreach (var entryElem in sheetElem.Elements("entry"))
+                    {
+                        string? entryName = entryElem.Attribute("name")?.Value;
+                        if (entryName == null) continue;
+                        
+                        TextModderLogger.LogInfo($"Found Custom Text: ({langCode}:{sheetName}:{entryName}:{entryElem.Value})");
+                        dictToAddTo[langCode][sheetName][entryName] = entryElem.Value;
+                    }
+                }
+            }
         }
     }
 }
