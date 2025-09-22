@@ -12,9 +12,9 @@
 
   <PropertyGroup>
     <!--These properties will control the generated PluginInfo. Version is also used by various parts of the build system.-->
-    <BepInExPluginGuid>TextSheetOverride</BepInExPluginGuid>
-    <BepInExPluginName>TextSheetOverride</BepInExPluginName>
-    <Version>0.1.0</Version>
+    <BepInExPluginGuid>TextModder</BepInExPluginGuid>
+    <BepInExPluginName>TextModder</BepInExPluginName>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
