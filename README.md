@@ -7,7 +7,7 @@ A mod that allows editing, overriding, and creation of new text items of Silkson
 This mod reads text in files located in `\Hollow Knight Silksong\Hollow Knight Silksong_Data\Mods\TextModder`. These files have a precise format where you specify the localization language code, Sheet ID, Entry ID, and finally text value. All values are seperated by ">". I tried to use XML, JSON parsing but bepinex/harmony would crash during that for some reason. If enough people complain I will likely change this.
 
 
-For example, a file with this line of text will override the main menu's quit button text (normally "Quit Game") with "Give Up". Note that this will only apply to the "EN" language code.
+For example, a file with this line of text will override the main menu's quit button text (normally "Quit Game") with "Give Up". Note that this will only apply to the "EN" language code. You could put this line in `\Hollow Knight Silksong\Hollow Knight Silksong_Data\Mods\TextModder\giveuptest.txt` and it will apply the next time you start the game.
 ```
 EN>MainMenu>MAIN_QUIT>Give Up
 ```
