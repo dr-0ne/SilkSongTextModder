@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
+using System.Xml;
 using System.Xml.Linq;
 using BepInEx;
 using BepInEx.Logging;
@@ -116,32 +116,49 @@ public class TextModderPlugin : BaseUnityPlugin
             newDict[LanguageCode.EN]["MainMenu"]["BUTTON_CAST"] = "LOCK IN";
             return newDict;*/
             
-            var returnDict = new Dictionary<LanguageCode, Dictionary<string?, Dictionary<string?, string>>>();
+            var returnDict = new Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>>();
             foreach (var filePath in Directory.GetFiles(ModDir))
             {
+                TextModderLogger.LogInfo($"Reading Text From File: {filePath}");
                 DeserializeCustomText(filePath,returnDict);
+                TextModderLogger.LogInfo($"Finshed reading Text From File: {filePath}");
             }
             
             return returnDict;
         }
 
-        static void DeserializeCustomText(string filePathToDeserialize, Dictionary<LanguageCode, Dictionary<string?, Dictionary<string?, string>>> dictToAddTo)
+        static void DeserializeCustomText(string filePathToDeserialize, Dictionary<LanguageCode, Dictionary<string, Dictionary<string, string>>> dictToAddTo)
         {
-            XDocument doc = XDocument.Load(filePathToDeserialize);
+            TextModderLogger.LogInfo($"something??");
+            //XDocument doc = XDocument.Load(File.ReadAllText(filePathToDeserialize));
 
-            if (doc.Root == null) return;
+            XmlReader xmlReader = XmlReader.Create(new StringReader( filePathToDeserialize));
             
-            foreach (var languageElem in doc.Root.Elements("language"))
+            while (xmlReader.ReadToFollowing("entry"))
+            {
+                xmlReader.MoveToFirstAttribute();
+                string value = xmlReader.Value;
+                xmlReader.MoveToElement();
+                string text2 = xmlReader.ReadElementContentAsString().Trim();
+                text2 = text2.UnescapeXml();
+                TextModderLogger.LogInfo($"{text2}");
+            }
+            
+            //if (doc.Root == null) return;
+            
+            /*foreach (var languageElem in doc.Root.Elements("language"))
             {
                 string? langName = languageElem.Attribute("name")?.Value;
+                TextModderLogger.LogInfo($"{langName}");
                 if (langName == null || !Enum.TryParse<LanguageCode>(langName, true, out var langCode))
                 {
                     continue;
                 }
+                TextModderLogger.LogInfo($"{langCode}");
 
                 if (!dictToAddTo.ContainsKey(langCode))
                 {
-                    dictToAddTo.Add(langCode, new Dictionary<string?, Dictionary<string?, string>>());
+                    dictToAddTo.Add(langCode, new Dictionary<string, Dictionary<string, string>>());
                 }
                 
                 foreach (var sheetElem in languageElem.Elements("sheet"))
@@ -151,7 +168,7 @@ public class TextModderPlugin : BaseUnityPlugin
 
                     if (!dictToAddTo[langCode].ContainsKey(sheetName))
                     {
-                        dictToAddTo[langCode].Add(sheetName, new Dictionary<string?, string>());
+                        dictToAddTo[langCode].Add(sheetName, new Dictionary<string, string>());
                     }
                     
                     foreach (var entryElem in sheetElem.Elements("entry"))
@@ -163,7 +180,7 @@ public class TextModderPlugin : BaseUnityPlugin
                         dictToAddTo[langCode][sheetName][entryName] = entryElem.Value;
                     }
                 }
-            }
+            }*/
         }
     }
 }
