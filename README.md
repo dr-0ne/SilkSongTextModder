@@ -2,7 +2,7 @@
 
 A mod that allows editing, overriding, and creation of new text items of Silksong's internal data. This can be used to change dialogue, names, tutorial text, menu items, etc.
 
-[Original Mod]()
+**[Original Mod](https://www.nexusmods.com/hollowknightsilksong/mods/381)**  
 [Source Code](https://github.com/KyleNeubarth/SilkSongTextModder)  
 [Text Asset Decrypter](https://github.com/KyleNeubarth/SilkSongTextAssetDecrypter) (Simple program to help you view Silksong's ingame text)
 
@@ -27,11 +27,11 @@ And lastly add a file into the same folder and call it "`TextModder`". This file
 
 **TLDR:** I have extracted and pinned a snapshot of the current English text sheets to this mod's files. Otherwise you will need to extract the data yourself.
 
-Internally, Silksong keeps localized text in large XML tables called "sheets". Sheets are arbitrary groupings of text that the developers thought was helpful for organization (EN_Song contains all the text for needolin NPC sing along music, for example). These sheets are TextAssets stored in the resources assetbundle (**"\Hollow Knight Silksong\Hollow Knight Silksong_Data\resource.assets"**). I used [AssetRipper](http://https//github.com/AssetRipper/AssetRipper) to decompile the AssetBundle and view the contents.
+Internally, Silksong keeps localized text in large XML tables called "sheets". Sheets are arbitrary groupings of text that the developers thought was helpful for organization (EN_Song contains all the text for needolin NPC sing along music, for example). These sheets are TextAssets stored in the resources assetbundle (**"\Hollow Knight Silksong\Hollow Knight Silksong_Data\resource.assets"**). I used [AssetRipper](https://github.com/AssetRipper/AssetRipper) to decompile the AssetBundle and view the contents.
 
 **Note:** If using AssetRipper remember to specify the Unity Version in it's settings. Silksong is using Unity "6000.0.50f1", which can be found by looking at the properties of the executable.
 
-Sheets have some laughable code obfuscation function which they are run through. Via decompiling Silksong's "Assembly.CSharp.dll" with [Dnspy](http://https//github.com/dnSpy/dnSpy) I found the obfuscation function which is pasted below.
+Sheets have some laughable code obfuscation function which they are run through. Via decompiling Silksong's "Assembly.CSharp.dll" with [Dnspy](https://github.com/dnSpy/dnSpy) I found the obfuscation function which is pasted below.
 ```csharp
 Decryption Functionpublic static byte[] Decrypt(byte[] encryptedBytes)
 {
