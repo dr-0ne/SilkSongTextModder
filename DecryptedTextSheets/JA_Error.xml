@@ -1,0 +1,7 @@
+<entries>
+<entry name="OK">OK</entry>
+<entry name="SAVE_FAILED_DESC">再度お試しください。<br>もし問題が解決されない場合は、hollowknightsilksong.com/helpをご参照ください。</entry>
+<entry name="SAVE_CORRUPTED_TITLE">セーブの読み込みに失敗しました。</entry>
+<entry name="SAVE_CORRUPTED_DESC">下のオプションから前回のオートセーブを試すこともできます。</entry>
+<entry name="SAVE_FAILED_TITLE">セーブの書き込みに失敗しました。</entry>
+</entries>

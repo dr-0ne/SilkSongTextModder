@@ -1,0 +1,25 @@
+<entries>
+<entry name="WOOD_WITCH_CURSE_ACCEPTED"><hpage>好吧。这最终仪式……需要我做什么？<page>诞辰……将至。献出……甲壳。主持……终仪。<page>诞辰之时……临近。</entry>
+<entry name="SETH_GUARDIAN_TALK_REPEAT">你可以在此圣地休息，但记住，越界一步，我就会视你为敌。</entry>
+<entry name="WOOD_WITCH_CURSE_OFFER">诞辰……诞辰将至。新芽啼哭、渴求。终仪可启。<page>白壳红袍。古老而强大。诞辰将至，此刻助我完成终仪。</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_COMPLETE_1">花……花芯。集齐。所需皆备。</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_DECLINE"><hpage>我收到了你的请求，但我必须拒绝。我的旅途不会止于这片树林。<page>拒绝。不。不可拒绝。诞辰将至。仪式必启。</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_ACCEPT"><hpage>若你能分享知识或是力量，我愿意帮忙。那种花芯……可以在树林中找到？<page>花……花芯。树林间，对。<page>寻找紫花。芯……在其中。<page>诞辰将至。带来花芯，共享力量。</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_COMPLETE_3">虫。红色披风。重生之时将至。<page>初仪完成。准备。迎接诞辰。<page>拿去吧……拿去。仪式残渣。</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_KEEPITEMS">仪……仪式。初仪必启。需要花芯。</entry>
+<entry name="WOOD_WITCH_CURSE_DECLINED"><hpage>我帮不了你，现在不行。或许其他旅者会提供帮助。<page>无虫……无虫到来。曾有许多……如今无虫。终仪……诞辰将至……</entry>
+<entry name="WOOD_WITCH_MANDRAKE_ASK">虫。红色披风。远行。你带来了……芽。<page>它在呼唤。呼唤仪式。献上新芽。</entry>
+<entry name="SETH_GUARDIAN_DECLINE">那请就此止步，不必打破这份和平。</entry>
+<entry name="WOOD_WITCH_MANDRAKE_ACCEPT">新芽……孱弱。新生。需要滋养。<page>滋……滋养。必受滋养。</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_ACCEPTED">寻找紫花。内有……珍贵花芯。<page>诞辰将至。带来花芯，共享力量。</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_REOFFER">虫。只剩你。再无虫来。再无。<page>为了仪式。花芯。需要花芯。带来此处，为了仪式。</entry>
+<entry name="SETH_GUARDIAN_OFFER">挑战守卫者？</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_COMPLETE_2">初仪。花芯仪式。初仪可启。</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_CANCOMPLETE">珍贵花芯……交出来。为了诞辰，为了仪式，它们必须流血……</entry>
+<entry name="WOOD_WITCH_FLOWER_QUEST_OFFER">……诞辰将至。现在，花芯仪式。<page>虫。只剩你。再无虫来。再无。<page>为了仪式。花芯。需要花芯。带来此处，为了仪式。</entry>
+<entry name="WOOD_WITCH_MEET">嘘……这外壳。白色面具，红色披风。<page>虫子。活着的虫子。<hpage>我算是虫子，不过只有部分是，但你倒不像是虫子。如果打扰了你的长眠，我十分抱歉。<page>长眠。苏醒时分已至。<page>生长。诞辰。诞辰将至。<page>听着，虫子。诞辰将至。</entry>
+<entry name="WOOD_WITCH_MANDRAKE_DECLINE">芽……芽必须献上。它在呼唤……呼唤仪式。</entry>
+<entry name="WOOD_WITCH_REPEAT">时刻将至……诞辰将至。</entry>
+<entry name="SETH_GUARDIAN_MEET">止步，陌生虫子。我奉命永远守护后方圣所。<page>想要过去，先问过我的兵器。</entry>
+<entry name="SETH_GUARDIAN_TALK1">你想的话，可以待在这里休息。我不是你的敌人。但只要你越界，我就会举针相向。<hpage>那就和我说说这处你守护的圣所吧，战士。这深林边缘的洞窟似乎早已被遗忘了。<page>有些事物或许会被隐藏，但绝不会被遗忘。圣所仍在，是为纪念森林的最初之种，是为纪念她的过往，以及愿她永存。<page>我是最后一位守卫者。很遗憾，这一职责已驱使我将许多生灵变成了针刃下的亡魂。</entry>
+</entries>

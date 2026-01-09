@@ -1,0 +1,7 @@
+<entries>
+<entry name="OK">Aceptar</entry>
+<entry name="SAVE_FAILED_DESC">Vuelve a intentarlo. Si el problema persiste, visita hollowknightsilksong.com/help para obtener más información.</entry>
+<entry name="SAVE_CORRUPTED_TITLE">Imposible leer el archivo guardado.</entry>
+<entry name="SAVE_CORRUPTED_DESC">Puedes intentar restaurar un archivo guardado anterior con la opción de abajo.</entry>
+<entry name="SAVE_FAILED_TITLE">No se ha podido guardar.</entry>
+</entries>

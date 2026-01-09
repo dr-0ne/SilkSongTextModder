@@ -1,0 +1,7 @@
+<entries>
+<entry name="OK">ОК</entry>
+<entry name="SAVE_FAILED_DESC">Попробуйте ещё раз. Если проблема сохранится, зайдите на hollowknightsilksong.com/help за дополнительной информацией.</entry>
+<entry name="SAVE_CORRUPTED_TITLE">Прочитать файл с сохранёнными данными не удалось.</entry>
+<entry name="SAVE_CORRUPTED_DESC">Вы можете попробовать восстановить предыдущее автосохранение, используя команду внизу.</entry>
+<entry name="SAVE_FAILED_TITLE">Записать сохранённые данные не удалось.</entry>
+</entries>

@@ -1,0 +1,7 @@
+<entries>
+<entry name="OK">OK</entry>
+<entry name="SAVE_FAILED_DESC">Riprova. Se il problema dovesse persistere, visita hollowknightsilksong.com/help per ulteriori informazioni.</entry>
+<entry name="SAVE_CORRUPTED_TITLE">Impossibile leggere il file di salvataggio.</entry>
+<entry name="SAVE_CORRUPTED_DESC">Puoi provare a ripristinare un salvataggio automatico precedente usando l’opzione sottostante.</entry>
+<entry name="SAVE_FAILED_TITLE">Salvataggio non riuscito.</entry>
+</entries>
