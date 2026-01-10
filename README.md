@@ -24,6 +24,8 @@ In order to figure out which "sheet" and "entry" the text you want to modify liv
 No. But there is a python script in the git repository that converts the xml files into working txt ones.  
 To use it just drag the xml files onto the .py file (just like dragging files into a folder) and it will spit out the txt version of the file. Just remember that the xmls have to have the original names for the script to work correctly.
 
+You can download the script from [here](https://github.com/dr-0ne/SilkSongTextModder/blob/5918b1513f48c8813968d6725258aa9b8ec58037/sheet_parser.py) by pressing the *download raw button* <img src="https://files.catbox.moe/cflc80.png" alt="icon" height="24">
+
 ### Can I use this to mod text in other mods?
 
 It is also possible to add new sheets and entries which the vanilla game does not use. You may be able to use these for modded content, but I haven't been able to test any of that. Good luck!
