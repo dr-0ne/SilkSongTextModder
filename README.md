@@ -1,4 +1,4 @@
-## Silksong Text Modder
+# Silksong Text Modder
 
 A mod that allows editing, overriding, and creation of new text items of Silksong's internal data. This can be used to change dialogue, names, tutorial text, menu items, etc.
 
@@ -6,26 +6,35 @@ A mod that allows editing, overriding, and creation of new text items of Silkson
 [Source Code](https://github.com/KyleNeubarth/SilkSongTextModder)  
 [Text Asset Decrypter](https://github.com/KyleNeubarth/SilkSongTextAssetDecrypter) (Simple program to help you view Silksong's ingame text)
 
-### How do I Modify Text?
+## FAQ
+
+### How do I modify text using this mod?
 
 This mod reads text in files located in **"\Hollow Knight Silksong\Hollow Knight Silksong_Data\Mods\TextModder"**.  
-These files have a precise format where you specify the localization language code, Sheet ID, Entry ID, and finally text value. All values are seperated by ">". I tried to use XML, JSON parsing but bepinex/harmony would crash during that for some reason. If enough people complain I will likely change this.
-
-
+These files have a precise format where you specify the localization language code, Sheet ID, Entry ID, and finally text value. All values are seperated by ">".
 For example, a file with this line of text will override the main menu's quit button text (normally "Quit Game") with "Give Up". Note that this will only apply to the "EN" language code. You could put this line in **"\Hollow Knight Silksong\Hollow Knight Silksong_Data\Mods\TextModder\giveuptest.txt"** and it will apply the next time you start the game.  
 `EN>MainMenu>MAIN_QUIT>Give Up`
 
-In order to figure out which "sheet" and "entry" the text you want to modify lives, you must inspect the existing game's TextAssets. See further instructions below or check out the [DecryptedTextSheets](https://www.nexusmods.com/hollowknightsilksong/mods/381?tab=files) from the original.
+### Where can I find the "sheet" and "entry"?
+
+In order to figure out which "sheet" and "entry" the text you want to modify lives, you must inspect the existing game's TextAssets. See further instructions below or check out the [DecryptedTextSheets](https://www.nexusmods.com/hollowknightsilksong/mods/381?tab=files) from the original or the **new ones** I made and uploaded on [GitHub](https://github.com/dr-0ne/SilkSongTextModder/tree/1fa162c243c850f521d1288b3e245d4af6b2ad66/DecryptedTextSheets).
+
+### Are there mod ready txt files of the xml files anywhere?
+
+No. But there is a python script in the git repository that converts the xml files into working txt ones.  
+To use it just drag the xml files onto the .py file (just like dragging files into a folder) and it will spit out the txt version of the file. Just remember that the xmls have to have the original names for the script to work correctly.
+
+### Can I use this to mod text in other mods?
 
 It is also possible to add new sheets and entries which the vanilla game does not use. You may be able to use these for modded content, but I haven't been able to test any of that. Good luck!
 
-### How to I make a mod using this?
-Create the text file like you would do normally for this mod. Then create the mod, place the text file in the mod folder (same folder where your `manifest.json` file is located)  
-And lastly add a file into the same folder and call it "`TextModder`". This file has to be exactly that. No lower case letters no *.txt*'s, just "`TextModder`".
+### How to I make a new mod using this?
 
-### How do I extract existing text from the game for reference?
+1. Create the text file the same way you would do it normally for this mod.  
+2. Then create the mod itself with all the necessery files and place the text file into your mod folder (same folder as where you would normally place your `manifest.json` file)  
+3. And lastly add a file into the same folder as the txt file and call it "`TextModder`". **This file has to be called exactly that!** No lower case letters no extansions, just "`TextModder`".
 
-**TLDR:** I have extracted and pinned a snapshot of the current English text sheets to this mod's files. Otherwise you will need to extract the data yourself.
+## How do I extract existing text from the game for reference?
 
 Internally, Silksong keeps localized text in large XML tables called "sheets". Sheets are arbitrary groupings of text that the developers thought was helpful for organization (EN_Song contains all the text for needolin NPC sing along music, for example). These sheets are TextAssets stored in the resources assetbundle (**"\Hollow Knight Silksong\Hollow Knight Silksong_Data\resource.assets"**). I used [AssetRipper](https://github.com/AssetRipper/AssetRipper) to decompile the AssetBundle and view the contents.
 
